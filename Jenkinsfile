@@ -16,5 +16,16 @@ pipeline{
                 sh "ls -lha SM"
             }
         }
+        stage("Clone cluster-resource-monitor"){
+            steps{
+                sh "git clone https://github.com/djerror327/cluster-resource-monitor.git"
+            }
+        }
+        stage("build cluster-resource-monitor"){
+            steps{
+                sh "mvn clean install -f cluster-resource-monitor"
+                sh "ls -la cluster-resource-monitor"
+            }
+        }
     }
 }
