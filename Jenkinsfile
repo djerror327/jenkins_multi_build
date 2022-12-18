@@ -6,7 +6,7 @@ pipeline{
 
     stages{
         parallel(
-            a:{
+            stage("Project SM"){
                 stage("clone SM"){
                     steps{
                         sh "git clone https://github.com/djerror327/SM.git"
@@ -19,7 +19,7 @@ pipeline{
                     }
                 }
             }
-            b:{
+            stage("Project cluster-resource-monitor"){
                 stage("Clone cluster-resource-monitor"){
                     steps{
                         sh "git clone https://github.com/djerror327/cluster-resource-monitor.git"
