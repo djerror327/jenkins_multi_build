@@ -5,8 +5,8 @@ pipeline{
     }
 
     stages{
-        parallel(
-            stage("Project SM"){
+        stage("Project SM"){
+            parallel{  
                 stages{
                     stage("clone SM"){
                         steps{
@@ -21,6 +21,7 @@ pipeline{
                     }
                 }
             }
-        )
+        }
+        
     }
 }
