@@ -5,10 +5,9 @@ pipeline{
 
     stages{
         stage("clone"){
-            
-            sh "git clone https://github.com/djerror327/SM.git"
+            steps{
+                sh "git clone https://github.com/djerror327/SM.git"
+            }
         }
     }
-
-    
 }
