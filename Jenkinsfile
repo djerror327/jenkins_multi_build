@@ -7,6 +7,7 @@ pipeline{
     stages{
         stage("Initiating parallel processing projects"){
             parallel{  
+
                 stage("Project SM"){
                     stages{
                         stage("clone SM"){
@@ -22,6 +23,22 @@ pipeline{
                         }
                     }
                 }
+                stage("Project cluster-resource-monitor"){
+                    stages{
+                        stage("Clone cluster-resource-monitor"){
+                            steps{
+                                sh "git clone https://github.com/djerror327/cluster-resource-monitor.git"
+                            }
+                        }
+                        stage("build cluster-resource-monitor"){
+                            steps{
+                                sh "mvn clean install -f cluster-resource-monitor"
+                                sh "ls -la cluster-resource-monitor"
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
