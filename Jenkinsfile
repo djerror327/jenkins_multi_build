@@ -5,10 +5,15 @@ pipeline{
     }
 
     stages{
-        stage("clone"){
+        stage("clone SM"){
             steps{
                 sh "git clone https://github.com/djerror327/SM.git"
-                sh "ls -lha"
+            }
+        }
+        stage("Build SM"){
+            steps{
+                sh "mvn clean install -f ./SM"
+                sh "ls -lha SM"
             }
         }
     }
