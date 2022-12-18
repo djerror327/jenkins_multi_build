@@ -1,0 +1,13 @@
+pipeline{
+    tools{
+        maven "Maven"
+    }
+
+    stages{
+        stage("clone"){
+            sh "git clone https://github.com/djerror327/SM.git"
+        }
+    }
+
+    
+}
