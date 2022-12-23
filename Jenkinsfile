@@ -8,15 +8,16 @@ pipeline{
     }
     stages{
         stage("Initiating parallel processing projects"){
-            when{
-                expression{
-                    params.Hierarchy=="SM_Tune"
-                    echo "SM TUNE"
-                }
-            }
+            
             parallel{  
 
                 stage("Project SM"){
+                    when{
+                        expression{
+                            params.Hierarchy=="SM_Tune"
+                            echo "SM TUNE"
+                        }
+                    }
                     stages{
                         stage("clone SM"){
                             steps{
