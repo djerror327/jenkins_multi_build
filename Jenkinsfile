@@ -4,7 +4,7 @@ pipeline{
         maven "Maven"
     }
     parameters{
-        choice(name:"Hierarchy" , choices:["SM_Tune","SM_GO"]description:"")
+        choice(name:"Hierarchy" , choices:["SM_Tune","SM_GO"],description:"")
     }
     stages{
         stage("Initiating parallel processing projects"){
