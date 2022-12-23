@@ -14,12 +14,6 @@ pipeline{
                     echo "SM TUNE"
                 }
             }
-            when{
-                expression{
-                    params.Hierarchy=="SM_GO"
-                    echo "SM_GO"
-                }
-            }
             parallel{  
 
                 stage("Project SM"){
