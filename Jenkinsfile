@@ -8,57 +8,61 @@ pipeline{
     }
     stages{
         stage("Initiating parallel processing projects"){
-            
             parallel{ 
-                    
-               
-                    stage("clone SM"){
-                        // when{
-                        //     expression{
-                        //         params.Hierarchy=='SM_Tune'
-                        //         echo "SM TUNE"
-                        //     }
-                        // }
-                        steps{
-                            script{
-                                if("${params.Hierarchy}"=='SM_Tune'){
-                                    sh "git clone https://github.com/djerror327/SM.git"
+                stage("Sarting Parallel processing"){
+                    stages{
+
+                        // Project SM
+                        stage("clone SM"){
+                            steps{
+                                script{
+                                    if("${params.Hierarchy}"=='SM_Tune'){
+                                        sh "git clone https://github.com/djerror327/SM.git"
+                                    }
+                                }
+                        
+                            }   
+                        }
+                        stage("Build SM"){
+                            steps{
+                                script{
+                                    if("${params.Hierarchy}"=='SM_Tune'){
+                                        sh "mvn clean install -f ./SM"
+                                        sh "ls -lha SM"
+                                    }
                                 }
                             }
-                            
+                    
                         }
-                        
-                    }
-                    // stage("Build SM"){
-                    //     when{
-                    //         expression{
-                    //             params.Hierarchy=='SM_Tune'
-                    //             echo "SM TUNE"
-                    //         }
-                    //     }
-                    //     steps{
-                    //         sh "mvn clean install -f ./SM"
-                    //         sh "ls -lha SM"
-                    //     }
-                        
-                    // }
+
+                        // Project cluster-resource-monitor
+                        stage("Clone cluster-resource-monitor"){
+                            steps{
+                                script{
+                                    if("${params.Hierarchy}"=='SM_GO'){
+                                        sh "git clone https://github.com/djerror327/cluster-resource-monitor.git"
+                                    }
+                                }
+                            }
+                        }
+                        stage("build cluster-resource-monitor"){
+                            steps{
+                                script{
+
+                                
+                                    if("${params.Hierarchy}"=='SM_GO'){
+                                        sh "mvn clean install -f cluster-resource-monitor"
+                                        sh "ls -la cluster-resource-monitor"
+                                    }
+                                }
+                            }
+                        }
+                 
                 
-                   
-                    // stage("Clone cluster-resource-monitor"){
-                    //     steps{
-                    //         sh "git clone https://github.com/djerror327/cluster-resource-monitor.git"
-                    //     }
-                    // }
-                    // stage("build cluster-resource-monitor"){
-                    //     steps{
-                    //         sh "mvn clean install -f cluster-resource-monitor"
-                    //         sh "ls -la cluster-resource-monitor"
-                    //     }
-                    // }
+                    }   
+                }
             }
         }
-                    
-        
     }
 }
     
