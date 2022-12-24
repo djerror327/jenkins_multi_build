@@ -4,7 +4,7 @@ pipeline{
         maven "Maven"
     }
     parameters{
-        choice(name:"Hierarchy" , choices:["SM_Tune","SM_GO"],description:"")
+        choice(name:"Hierarchy" , choices:['SM_Tune','SM_GO'],description:"")
     }
     stages{
         stage("Initiating parallel processing projects"){
@@ -15,7 +15,7 @@ pipeline{
                     stage("clone SM"){
                         when{
                             expression{
-                                params.Hierarchy=="SM_Tune"
+                                params.Hierarchy=='SM_Tune'
                                 echo "SM TUNE"
                             }
                         }
@@ -27,7 +27,7 @@ pipeline{
                     stage("Build SM"){
                         when{
                             expression{
-                                params.Hierarchy=="SM_Tune"
+                                params.Hierarchy=='SM_Tune'
                                 echo "SM TUNE"
                             }
                         }
