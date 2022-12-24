@@ -13,30 +13,35 @@ pipeline{
                     
                
                     stage("clone SM"){
-                        when{
-                            expression{
-                                params.Hierarchy=='SM_Tune'
-                                echo "SM TUNE"
-                            }
-                        }
+                        // when{
+                        //     expression{
+                        //         params.Hierarchy=='SM_Tune'
+                        //         echo "SM TUNE"
+                        //     }
+                        // }
                         steps{
-                            sh "git clone https://github.com/djerror327/SM.git"
+                            script{
+                                if("${params.Hierarchy}"=='SM_Tune'){
+                                    sh "git clone https://github.com/djerror327/SM.git"
+                                }
+                            }
+                            
                         }
                         
                     }
-                    stage("Build SM"){
-                        when{
-                            expression{
-                                params.Hierarchy=='SM_Tune'
-                                echo "SM TUNE"
-                            }
-                        }
-                        steps{
-                            sh "mvn clean install -f ./SM"
-                            sh "ls -lha SM"
-                        }
+                    // stage("Build SM"){
+                    //     when{
+                    //         expression{
+                    //             params.Hierarchy=='SM_Tune'
+                    //             echo "SM TUNE"
+                    //         }
+                    //     }
+                    //     steps{
+                    //         sh "mvn clean install -f ./SM"
+                    //         sh "ls -lha SM"
+                    //     }
                         
-                    }
+                    // }
                 
                    
                     // stage("Clone cluster-resource-monitor"){
