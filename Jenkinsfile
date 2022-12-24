@@ -19,6 +19,14 @@ pipeline{
                                     if("${params.Hierarchy}"=='SM_Tune'){
                                         sh "git clone https://github.com/djerror327/SM.git"
                                     }
+
+                                    stage("test stage"){
+                                        steps{
+                                            script{
+                                                echo "test echo in nested scripts"
+                                            }
+                                        }
+                                    }
                                 }
                         
                             }   
@@ -68,7 +76,7 @@ pipeline{
                     }
                 }
 
-                
+
             }
         }
     }
