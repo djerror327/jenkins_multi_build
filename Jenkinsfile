@@ -11,7 +11,7 @@ pipeline{
             
             parallel{ 
                     
-                stages{
+               
                     stage("clone SM"){
                         when{
                             expression{
@@ -50,10 +50,10 @@ pipeline{
                     //         sh "ls -la cluster-resource-monitor"
                     //     }
                     // }
-                }
             }
-                    
         }
+                    
+        
     }
 }
     
