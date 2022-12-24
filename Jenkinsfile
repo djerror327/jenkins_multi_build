@@ -19,14 +19,6 @@ pipeline{
                                     if("${params.Hierarchy}"=='SM_Tune'){
                                         sh "git clone https://github.com/djerror327/SM.git"
                                     }
-
-                                    stage("test stage"){
-                                        steps{
-                                            script{
-                                                echo "test echo in nested scripts"
-                                            }
-                                        }
-                                    }
                                 }
                         
                             }   
@@ -64,8 +56,6 @@ pipeline{
                         stage("build cluster-resource-monitor"){
                             steps{
                                 script{
-
-                                
                                     if("${params.Hierarchy}"=='SM_GO'){
                                         sh "mvn clean install -f cluster-resource-monitor"
                                         sh "ls -la cluster-resource-monitor"
@@ -76,7 +66,7 @@ pipeline{
                     }
                 }
 
-
+                
             }
         }
     }
