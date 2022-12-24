@@ -9,10 +9,10 @@ pipeline{
     stages{
         stage("Initiating parallel processing projects"){
             parallel{ 
-                stage("Sarting Parallel processing"){
-                    stages{
 
-                        // Project SM
+                 // Project SM
+                stage("Sarting Parallel project SM"){
+                    stages{
                         stage("clone SM"){
                             steps{
                                 script{
@@ -35,7 +35,15 @@ pipeline{
                     
                         }
 
-                        // Project cluster-resource-monitor
+                        
+                 
+                
+                    }   
+                }
+
+                // Project cluster-resource-monitor
+                stage("Sarting Parallel project cluster-resource-monitor"){
+                    stages{
                         stage("Clone cluster-resource-monitor"){
                             steps{
                                 script{
@@ -57,10 +65,10 @@ pipeline{
                                 }
                             }
                         }
-                 
-                
-                    }   
+                    }
                 }
+
+                
             }
         }
     }
