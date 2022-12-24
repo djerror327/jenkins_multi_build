@@ -9,40 +9,32 @@ pipeline{
     stages{
         stage("Initiating parallel processing projects"){
             
-            parallel{  
-
-                stage("Project SM"){
-                    input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
-                    // when{
-                    //     expression{
-                    //         params.Hierarchy=="SM_Tune"
-                    //         echo "SM TUNE"
-                            
-                    //     }
-                    //     stages{
-                    //         stage("clone SM"){
-                    //              steps{
-                    //                 sh "git clone https://github.com/djerror327/SM.git"
-                    //              }
-                    //         }
-                    //         stage("Build SM"){
-                    //             steps{
-                    //                 sh "mvn clean install -f ./SM"
-                    //                 sh "ls -lha SM"
-                    //             }
-                    //         }
-                    //     }
-                    // }
+            parallel{ 
+                    
+                        stages{
+                            stage("clone SM"){
+                                when{
+                                    expression{
+                                        params.Hierarchy=="SM_Tune"
+                                        echo "SM TUNE"
+                                    }
+                                 steps{
+                                    sh "git clone https://github.com/djerror327/SM.git"
+                                 }
+                            }
+                            stage("Build SM"){
+                                when{
+                                    expression{
+                                        params.Hierarchy=="SM_Tune"
+                                        echo "SM TUNE"
+                                    }
+                                steps{
+                                    sh "mvn clean install -f ./SM"
+                                    sh "ls -lha SM"
+                                }
+                            }
+                        }
+                    }
                     
                 }
                 stage("Project cluster-resource-monitor"){
